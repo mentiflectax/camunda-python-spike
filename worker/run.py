@@ -1,4 +1,5 @@
 import logging
+from camunda.external_task.external_task import ExternalTask, TaskResult
 from concurrent.futures.thread import ThreadPoolExecutor
 from camunda.external_task.external_task_worker import ExternalTaskWorker
 
@@ -17,7 +18,7 @@ def sample_external_task(task: ExternalTask) -> TaskResult:
 
 def main():
     print("Starting the worker")
-    ExternalTaskWorker(worker_id="1", config=default_config).subscribe("sample_external_task", sample_external_task)
+    ExternalTaskWorker(worker_id="1", config=default_config, base_url="http://localhost:8081/engine-rest").subscribe("sample_external_task", sample_external_task)
 
 if __name__ == '__main__':
     main()   
