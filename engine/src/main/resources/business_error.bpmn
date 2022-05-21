@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1pf9fjh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="BusinessErrorDemo" name="Business Error Demo" isExecutable="true">
+    <bpmn:startEvent id="start">
+      <bpmn:outgoing>Flow_1mvl6xc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1mvl6xc" sourceRef="start" targetRef="order_item_from_warehouse" />
+    <bpmn:serviceTask id="order_item_from_warehouse" name="Order the item from the warehouse" camunda:asyncBefore="true" camunda:type="external" camunda:topic="order_item_from_warehouse">
+      <bpmn:incoming>Flow_1mvl6xc</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yicvpp</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_1wott97" camunda:asyncBefore="true" attachedToRef="order_item_from_warehouse">
+      <bpmn:outgoing>Flow_1dw4uy2</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1830j8j" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1dw4uy2" sourceRef="Event_1wott97" targetRef="do_something" />
+    <bpmn:endEvent id="Event_1qv33z1">
+      <bpmn:incoming>Flow_19htzvj</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_19htzvj" sourceRef="do_something" targetRef="Event_1qv33z1" />
+    <bpmn:userTask id="do_something" name="Do something" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_1dw4uy2</bpmn:incoming>
+      <bpmn:outgoing>Flow_19htzvj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1yicvpp" sourceRef="order_item_from_warehouse" targetRef="proceed_with_the_order" />
+    <bpmn:userTask id="proceed_with_the_order" name="Proceed with the order" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_1yicvpp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rxdhtd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0t1hhns">
+      <bpmn:incoming>Flow_1rxdhtd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1rxdhtd" sourceRef="proceed_with_the_order" targetRef="Event_0t1hhns" />
+    <bpmn:textAnnotation id="TextAnnotation_1y2b525">
+      <bpmn:text>Customer ordered an item in a web shop.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1pr34yo" sourceRef="start" targetRef="TextAnnotation_1y2b525" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="BusinessErrorDemo">
+      <bpmndi:BPMNShape id="TextAnnotation_1y2b525_di" bpmnElement="TextAnnotation_1y2b525">
+        <dc:Bounds x="147" y="50" width="100" height="55" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1mvl6xc_di" bpmnElement="Flow_1mvl6xc">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="260" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dw4uy2_di" bpmnElement="Flow_1dw4uy2">
+        <di:waypoint x="360" y="235" />
+        <di:waypoint x="360" y="300" />
+        <di:waypoint x="430" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19htzvj_di" bpmnElement="Flow_19htzvj">
+        <di:waypoint x="530" y="300" />
+        <di:waypoint x="602" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yicvpp_di" bpmnElement="Flow_1yicvpp">
+        <di:waypoint x="360" y="177" />
+        <di:waypoint x="430" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rxdhtd_di" bpmnElement="Flow_1rxdhtd">
+        <di:waypoint x="530" y="177" />
+        <di:waypoint x="602" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06twuty_di" bpmnElement="order_item_from_warehouse">
+        <dc:Bounds x="260" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07520ro_di" bpmnElement="do_something">
+        <dc:Bounds x="430" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1eb5vb6_di" bpmnElement="proceed_with_the_order">
+        <dc:Bounds x="430" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0t1hhns_di" bpmnElement="Event_0t1hhns">
+        <dc:Bounds x="602" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1qv33z1_di" bpmnElement="Event_1qv33z1">
+        <dc:Bounds x="602" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1pr34yo_di" bpmnElement="Association_1pr34yo">
+        <di:waypoint x="197" y="159" />
+        <di:waypoint x="197" y="105" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1sj7ftr_di" bpmnElement="Event_1wott97">
+        <dc:Bounds x="342" y="199" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
