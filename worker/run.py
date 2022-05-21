@@ -27,11 +27,16 @@ def determine_type_of_customer(task: ExternalTask) -> TaskResult:
         customer_type = "INDIVIDUAL"
     return task.complete({"CUSTOMER_TYPE": customer_type})
 
+
+def provoke_technical_failure(task: ExternalTask) -> TaskResult:
+    return task.failure(error_message="Technical error occurred",  error_details="Demonstration of simulating a technical error", max_retries=0, retry_timeout=5000)
+
 def main():
     configure_logging()
     topics = [
         ("sample_external_task", sample_external_task),
-        ("determine_type_of_customer", determine_type_of_customer)
+        ("determine_type_of_customer", determine_type_of_customer),
+        ("provoke_technical_failure", provoke_technical_failure)
     ]
     executor = ThreadPoolExecutor(max_workers=len(topics))
     for index, topic_handler in enumerate(topics):
