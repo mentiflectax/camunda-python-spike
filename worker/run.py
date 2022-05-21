@@ -27,6 +27,10 @@ def determine_type_of_customer(task: ExternalTask) -> TaskResult:
         customer_type = "INDIVIDUAL"
     return task.complete({"CUSTOMER_TYPE": customer_type})
 
+
+def provoke_technical_failure(task: ExternalTask) -> TaskResult:
+    return task.failure(error_message="Technical error occurred",  error_details="Demonstration of simulating a technical error", max_retries=3, retry_timeout=5000)
+
 def main():
     configure_logging()
     topics = [
