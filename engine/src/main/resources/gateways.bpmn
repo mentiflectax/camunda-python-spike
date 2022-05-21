@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0esj6vh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
-  <bpmn:process id="Process_1obzgiv" isExecutable="true">
+  <bpmn:process id="Gateway_Example" name="Gateway Example" isExecutable="true">
     <bpmn:startEvent id="start" camunda:asyncBefore="true">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="customer_number" label="Customer Number" type="long">
+          <camunda:formField id="CUSTOMER_NUMBER" label="Customer Number" type="long">
             <camunda:validation />
           </camunda:formField>
         </camunda:formData>
@@ -36,18 +36,23 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_15rqq3s" sourceRef="Activity_1lmbzwx" targetRef="Gateway_1cwnjzd" />
     <bpmn:endEvent id="Event_0123at4">
-      <bpmn:incoming>Flow_07t5sxz</bpmn:incoming>
+      <bpmn:incoming>Flow_0sdb02i</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_07t5sxz" sourceRef="Gateway_1cwnjzd" targetRef="Event_0123at4" />
+    <bpmn:sequenceFlow id="Flow_07t5sxz" sourceRef="Gateway_1cwnjzd" targetRef="wait" />
     <bpmn:task id="Activity_121asoc" name="Do something else">
       <bpmn:incoming>Flow_187d0sn</bpmn:incoming>
       <bpmn:outgoing>Flow_0ax3ap1</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_187d0sn" name="It&#39;s not a corporate client" sourceRef="is_this_a_corporate_client_or_individual" targetRef="Activity_121asoc" />
     <bpmn:sequenceFlow id="Flow_0ax3ap1" sourceRef="Activity_121asoc" targetRef="Gateway_1cwnjzd" />
+    <bpmn:sequenceFlow id="Flow_0sdb02i" sourceRef="wait" targetRef="Event_0123at4" />
+    <bpmn:userTask id="wait" name="Wait">
+      <bpmn:incoming>Flow_07t5sxz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sdb02i</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1obzgiv">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Gateway_Example">
       <bpmndi:BPMNEdge id="Flow_0xcgzbh_di" bpmnElement="Flow_0xcgzbh">
         <di:waypoint x="215" y="117" />
         <di:waypoint x="260" y="117" />
@@ -69,7 +74,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_07t5sxz_di" bpmnElement="Flow_07t5sxz">
         <di:waypoint x="885" y="117" />
-        <di:waypoint x="1002" y="117" />
+        <di:waypoint x="940" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_187d0sn_di" bpmnElement="Flow_187d0sn">
         <di:waypoint x="480" y="142" />
@@ -83,6 +88,10 @@
         <di:waypoint x="720" y="230" />
         <di:waypoint x="860" y="230" />
         <di:waypoint x="860" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sdb02i_di" bpmnElement="Flow_0sdb02i">
+        <di:waypoint x="1040" y="117" />
+        <di:waypoint x="1102" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
         <dc:Bounds x="179" y="99" width="36" height="36" />
@@ -103,12 +112,15 @@
       <bpmndi:BPMNShape id="Gateway_1cwnjzd_di" bpmnElement="Gateway_1cwnjzd" isMarkerVisible="true">
         <dc:Bounds x="835" y="92" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0123at4_di" bpmnElement="Event_0123at4">
-        <dc:Bounds x="1002" y="99" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_121asoc_di" bpmnElement="Activity_121asoc">
         <dc:Bounds x="620" y="190" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0123at4_di" bpmnElement="Event_0123at4">
+        <dc:Bounds x="1102" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1f0xf29_di" bpmnElement="wait">
+        <dc:Bounds x="940" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
