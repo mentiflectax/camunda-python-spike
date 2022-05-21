@@ -20,7 +20,12 @@ def sample_external_task(task: ExternalTask) -> TaskResult:
 
 def determine_type_of_customer(task: ExternalTask) -> TaskResult:
     print("determine_type_of_customer")
-    return task.complete({"CUSTOMER_TYPE": "CORPORATE"})
+    customer_nr = task.get_variable("CUSTOMER_NUMBER")
+    if ((customer_nr % 2) == 0):
+        customer_type = "CORPORATE"
+    else:
+        customer_type = "INDIVIDUAL"
+    return task.complete({"CUSTOMER_TYPE": customer_type})
 
 def main():
     configure_logging()
@@ -32,7 +37,7 @@ def main():
     for index, topic_handler in enumerate(topics):
         topic = topic_handler[0]
         handler_func = topic_handler[1]
-        executor.submit(ExternalTaskWorker(worker_id=index, config=default_config).subscribe, topic, handler_func, base_url="http://localhost:8081/engine-rest")
+        executor.submit(ExternalTaskWorker(worker_id=index, config=default_config, base_url="http://localhost:8081/engine-rest").subscribe, topic, handler_func)
 
 def configure_logging():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler()])

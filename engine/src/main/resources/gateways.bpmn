@@ -22,33 +22,28 @@
       <bpmn:outgoing>Flow_187d0sn</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_12j1qpi" sourceRef="determine_type_of_customer" targetRef="is_this_a_corporate_client_or_individual" />
-    <bpmn:task id="Activity_1lmbzwx" name="Do something">
-      <bpmn:incoming>Flow_02nne1a</bpmn:incoming>
-      <bpmn:outgoing>Flow_15rqq3s</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_02nne1a" name="It&#39;s a corporate client" sourceRef="is_this_a_corporate_client_or_individual" targetRef="Activity_1lmbzwx">
+    <bpmn:sequenceFlow id="Flow_02nne1a" name="It&#39;s a corporate client" sourceRef="is_this_a_corporate_client_or_individual" targetRef="do_something">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${"CUSTOMER_TYPE" == "CORPORATE"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:exclusiveGateway id="Gateway_1cwnjzd">
+    <bpmn:exclusiveGateway id="Gateway_1cwnjzd" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_15rqq3s</bpmn:incoming>
       <bpmn:incoming>Flow_0ax3ap1</bpmn:incoming>
       <bpmn:outgoing>Flow_07t5sxz</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_15rqq3s" sourceRef="Activity_1lmbzwx" targetRef="Gateway_1cwnjzd" />
-    <bpmn:endEvent id="Event_0123at4">
-      <bpmn:incoming>Flow_0sdb02i</bpmn:incoming>
+    <bpmn:sequenceFlow id="Flow_15rqq3s" sourceRef="do_something" targetRef="Gateway_1cwnjzd" />
+    <bpmn:endEvent id="Event_0123at4" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_07t5sxz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_07t5sxz" sourceRef="Gateway_1cwnjzd" targetRef="wait" />
-    <bpmn:task id="Activity_121asoc" name="Do something else">
+    <bpmn:sequenceFlow id="Flow_07t5sxz" sourceRef="Gateway_1cwnjzd" targetRef="Event_0123at4" />
+    <bpmn:task id="do_something_else" name="Do something else" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_187d0sn</bpmn:incoming>
       <bpmn:outgoing>Flow_0ax3ap1</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_187d0sn" name="It&#39;s not a corporate client" sourceRef="is_this_a_corporate_client_or_individual" targetRef="Activity_121asoc" />
-    <bpmn:sequenceFlow id="Flow_0ax3ap1" sourceRef="Activity_121asoc" targetRef="Gateway_1cwnjzd" />
-    <bpmn:sequenceFlow id="Flow_0sdb02i" sourceRef="wait" targetRef="Event_0123at4" />
-    <bpmn:userTask id="wait" name="Wait">
-      <bpmn:incoming>Flow_07t5sxz</bpmn:incoming>
-      <bpmn:outgoing>Flow_0sdb02i</bpmn:outgoing>
+    <bpmn:sequenceFlow id="Flow_187d0sn" name="It&#39;s not a corporate client" sourceRef="is_this_a_corporate_client_or_individual" targetRef="do_something_else" />
+    <bpmn:sequenceFlow id="Flow_0ax3ap1" sourceRef="do_something_else" targetRef="Gateway_1cwnjzd" />
+    <bpmn:userTask id="do_something" name="Do something" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_02nne1a</bpmn:incoming>
+      <bpmn:outgoing>Flow_15rqq3s</bpmn:outgoing>
     </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -74,7 +69,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_07t5sxz_di" bpmnElement="Flow_07t5sxz">
         <di:waypoint x="885" y="117" />
-        <di:waypoint x="940" y="117" />
+        <di:waypoint x="942" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_187d0sn_di" bpmnElement="Flow_187d0sn">
         <di:waypoint x="480" y="142" />
@@ -89,10 +84,6 @@
         <di:waypoint x="860" y="230" />
         <di:waypoint x="860" y="142" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0sdb02i_di" bpmnElement="Flow_0sdb02i">
-        <di:waypoint x="1040" y="117" />
-        <di:waypoint x="1102" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
         <dc:Bounds x="179" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -105,22 +96,18 @@
           <dc:Bounds x="436" y="42" width="88" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1lmbzwx_di" bpmnElement="Activity_1lmbzwx">
-        <dc:Bounds x="620" y="77" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1cwnjzd_di" bpmnElement="Gateway_1cwnjzd" isMarkerVisible="true">
         <dc:Bounds x="835" y="92" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_121asoc_di" bpmnElement="Activity_121asoc">
+      <bpmndi:BPMNShape id="Activity_121asoc_di" bpmnElement="do_something_else">
         <dc:Bounds x="620" y="190" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0123at4_di" bpmnElement="Event_0123at4">
-        <dc:Bounds x="1102" y="99" width="36" height="36" />
+        <dc:Bounds x="942" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1f0xf29_di" bpmnElement="wait">
-        <dc:Bounds x="940" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_0rugnb6_di" bpmnElement="do_something">
+        <dc:Bounds x="620" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
