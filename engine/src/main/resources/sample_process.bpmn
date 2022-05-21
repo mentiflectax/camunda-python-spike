@@ -5,25 +5,34 @@
       <bpmn:extensionElements />
       <bpmn:outgoing>Flow_1qh61m0</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1qh61m0" sourceRef="start" targetRef="user_task" />
+    <bpmn:sequenceFlow id="Flow_1qh61m0" sourceRef="start" targetRef="sample_external_task" />
     <bpmn:endEvent id="end" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_1o3hatu</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1o3hatu" sourceRef="user_task" targetRef="end" />
     <bpmn:userTask id="user_task" name="Hello" camunda:asyncBefore="true">
-      <bpmn:incoming>Flow_1qh61m0</bpmn:incoming>
+      <bpmn:incoming>Flow_0tgq8ih</bpmn:incoming>
       <bpmn:outgoing>Flow_1o3hatu</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0tgq8ih" sourceRef="sample_external_task" targetRef="user_task" />
+    <bpmn:serviceTask id="sample_external_task" name="Sample external task" camunda:asyncBefore="true" camunda:type="external" camunda:topic="sample_external_task">
+      <bpmn:incoming>Flow_1qh61m0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tgq8ih</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SampleProcess">
       <bpmndi:BPMNEdge id="Flow_1o3hatu_di" bpmnElement="Flow_1o3hatu">
-        <di:waypoint x="340" y="120" />
-        <di:waypoint x="392" y="120" />
+        <di:waypoint x="470" y="120" />
+        <di:waypoint x="522" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1qh61m0_di" bpmnElement="Flow_1qh61m0">
         <di:waypoint x="188" y="120" />
-        <di:waypoint x="240" y="120" />
+        <di:waypoint x="220" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tgq8ih_di" bpmnElement="Flow_0tgq8ih">
+        <di:waypoint x="320" y="120" />
+        <di:waypoint x="370" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
         <dc:Bounds x="152" y="102" width="36" height="36" />
@@ -32,10 +41,13 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0lgbiom_di" bpmnElement="end">
-        <dc:Bounds x="392" y="102" width="36" height="36" />
+        <dc:Bounds x="522" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1cmwi6r_di" bpmnElement="user_task">
-        <dc:Bounds x="240" y="80" width="100" height="80" />
+        <dc:Bounds x="370" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0sx6k9v_di" bpmnElement="sample_external_task">
+        <dc:Bounds x="220" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
