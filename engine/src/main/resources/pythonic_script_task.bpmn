@@ -5,21 +5,9 @@
       <bpmn:outgoing>Flow_1nlsg7w</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_1nlsg7w" sourceRef="StartEvent_1" targetRef="set_process_variable" />
-    <bpmn:scriptTask id="pythonic_script_task" name="Pythonic Script Task" scriptFormat="jython">
-      <bpmn:extensionElements />
-      <bpmn:incoming>Flow_00af5bs</bpmn:incoming>
-      <bpmn:outgoing>Flow_1ql2ev0</bpmn:outgoing>
-      <bpmn:script>print("Hello from the pythonic script task")</bpmn:script>
-    </bpmn:scriptTask>
     <bpmn:endEvent id="Event_0wc4j41">
-      <bpmn:incoming>Flow_040w9ui</bpmn:incoming>
+      <bpmn:incoming>Flow_00af5bs</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1ql2ev0" sourceRef="pythonic_script_task" targetRef="Activity_018azbx" />
-    <bpmn:sequenceFlow id="Flow_040w9ui" sourceRef="Activity_018azbx" targetRef="Event_0wc4j41" />
-    <bpmn:userTask id="Activity_018azbx" name="Wait">
-      <bpmn:incoming>Flow_1ql2ev0</bpmn:incoming>
-      <bpmn:outgoing>Flow_040w9ui</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_0xdd025" sourceRef="set_process_variable" targetRef="wait_1" />
     <bpmn:sequenceFlow id="Flow_1auw643" sourceRef="wait_1" targetRef="read_process_variables" />
     <bpmn:scriptTask id="set_process_variable" name="Set process variable in Python" camunda:asyncBefore="true" scriptFormat="jython">
@@ -54,7 +42,7 @@ print("intVariable: " + str(intVariable))
 print("fractionalVariable: " + str(fractionalVariable))
 print("boolVariable: " + str(boolVariable))</bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:sequenceFlow id="Flow_00af5bs" sourceRef="wait_2" targetRef="pythonic_script_task" />
+    <bpmn:sequenceFlow id="Flow_00af5bs" sourceRef="wait_2" targetRef="Event_0wc4j41" />
     <bpmn:userTask id="wait_2" name="Wait 2" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_17gb18l</bpmn:incoming>
       <bpmn:outgoing>Flow_00af5bs</bpmn:outgoing>
@@ -65,14 +53,6 @@ print("boolVariable: " + str(boolVariable))</bpmn:script>
       <bpmndi:BPMNEdge id="Flow_1nlsg7w_di" bpmnElement="Flow_1nlsg7w">
         <di:waypoint x="215" y="117" />
         <di:waypoint x="260" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ql2ev0_di" bpmnElement="Flow_1ql2ev0">
-        <di:waypoint x="1066" y="117" />
-        <di:waypoint x="1120" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_040w9ui_di" bpmnElement="Flow_040w9ui">
-        <di:waypoint x="1220" y="117" />
-        <di:waypoint x="1292" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0xdd025_di" bpmnElement="Flow_0xdd025">
         <di:waypoint x="360" y="117" />
@@ -88,7 +68,7 @@ print("boolVariable: " + str(boolVariable))</bpmn:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_00af5bs_di" bpmnElement="Flow_00af5bs">
         <di:waypoint x="840" y="117" />
-        <di:waypoint x="966" y="117" />
+        <di:waypoint x="922" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
@@ -102,17 +82,11 @@ print("boolVariable: " + str(boolVariable))</bpmn:script>
       <bpmndi:BPMNShape id="Activity_04gicbi_di" bpmnElement="read_process_variables">
         <dc:Bounds x="590" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_143dul9_di" bpmnElement="pythonic_script_task">
-        <dc:Bounds x="966" y="77" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0wc4j41_di" bpmnElement="Event_0wc4j41">
-        <dc:Bounds x="1292" y="99" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1jyygmc_di" bpmnElement="Activity_018azbx">
-        <dc:Bounds x="1120" y="77" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_15nkcmh_di" bpmnElement="wait_2">
         <dc:Bounds x="740" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wc4j41_di" bpmnElement="Event_0wc4j41">
+        <dc:Bounds x="922" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

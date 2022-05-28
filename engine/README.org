@@ -51,7 +51,6 @@ execution.getVariable("FRACTIONAL_PROCESS_VARIABLE")
 execution.getVariable("BOOLEAN_PROCESS_VARIABLE")
 #+end_src
 
-
 **** Create an incident
 
 **** Throw a business error
@@ -62,5 +61,4 @@ execution.getVariable("BOOLEAN_PROCESS_VARIABLE")
 execution.getProcessBusinessKey()
 #+end_src
 
-**** Set business key
 
