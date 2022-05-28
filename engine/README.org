@@ -30,7 +30,7 @@ public static void main(String... args){
 *** What can a Pythonic script task do?
 
 According to section [[https://docs.camunda.org/manual/7.17/user-guide/process-engine/scripting/#variables-available-during-script-execution][Variables Available During Script Execution]],
-the variable ~execution~ of type [[https://docs.camunda.org/javadoc/camunda-bpm-platform/7.17/org/camunda/bpm/engine/delegate/DelegateExecution.html][DelegateExecution]
+the variable ~execution~ of type [[https://docs.camunda.org/javadoc/camunda-bpm-platform/7.17/org/camunda/bpm/engine/delegate/DelegateExecution.html][DelegateExecution]]
 is available within the Pythonic script tasks.
 
 **** Set process variable
