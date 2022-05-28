@@ -12,9 +12,14 @@
       <bpmn:script>print("Hello from the pythonic script task")</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:endEvent id="Event_0wc4j41">
-      <bpmn:incoming>Flow_1ql2ev0</bpmn:incoming>
+      <bpmn:incoming>Flow_040w9ui</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1ql2ev0" sourceRef="pythonic_script_task" targetRef="Event_0wc4j41" />
+    <bpmn:sequenceFlow id="Flow_1ql2ev0" sourceRef="pythonic_script_task" targetRef="Activity_018azbx" />
+    <bpmn:sequenceFlow id="Flow_040w9ui" sourceRef="Activity_018azbx" targetRef="Event_0wc4j41" />
+    <bpmn:userTask id="Activity_018azbx" name="Wait">
+      <bpmn:incoming>Flow_1ql2ev0</bpmn:incoming>
+      <bpmn:outgoing>Flow_040w9ui</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Pythonic_Script_Task_Demo_Process">
@@ -24,7 +29,11 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ql2ev0_di" bpmnElement="Flow_1ql2ev0">
         <di:waypoint x="366" y="117" />
-        <di:waypoint x="422" y="117" />
+        <di:waypoint x="420" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_040w9ui_di" bpmnElement="Flow_040w9ui">
+        <di:waypoint x="520" y="117" />
+        <di:waypoint x="592" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
@@ -33,7 +42,10 @@
         <dc:Bounds x="266" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0wc4j41_di" bpmnElement="Event_0wc4j41">
-        <dc:Bounds x="422" y="99" width="36" height="36" />
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jyygmc_di" bpmnElement="Activity_018azbx">
+        <dc:Bounds x="420" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

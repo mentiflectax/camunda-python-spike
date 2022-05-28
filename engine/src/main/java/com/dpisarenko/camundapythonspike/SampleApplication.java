@@ -15,20 +15,8 @@ import javax.script.ScriptEngineManager;
 @SpringBootApplication
 @EnableProcessApplication
 public class SampleApplication {
-    @Autowired
-    private ProcessEngine engine;
-
     public static void main(String... args){
-        // ScriptEngineManager.
         Options.importSite = false;
-        final ScriptEngineManager manager = new ScriptEngineManager();
-        final ScriptEngine engine = manager.getEngineByName("jython");
-
         SpringApplication.run(SampleApplication.class, args);
-    }
-
-    @PostConstruct
-    public void test() {
-        System.out.println("Hello");
     }
 }
