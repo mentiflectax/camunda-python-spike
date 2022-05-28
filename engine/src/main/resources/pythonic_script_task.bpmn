@@ -5,7 +5,7 @@
       <bpmn:outgoing>Flow_1nlsg7w</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_1nlsg7w" sourceRef="StartEvent_1" targetRef="pythonic_script_task" />
-    <bpmn:scriptTask id="pythonic_script_task" name="Pythonic Script Task" scriptFormat="python">
+    <bpmn:scriptTask id="pythonic_script_task" name="Pythonic Script Task" scriptFormat="jython">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_1nlsg7w</bpmn:incoming>
       <bpmn:outgoing>Flow_1ql2ev0</bpmn:outgoing>
