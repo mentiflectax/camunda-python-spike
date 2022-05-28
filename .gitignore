@@ -1,0 +1,3 @@
+.DS_Store
+engine/.jython_cache/
+worker/run.py~

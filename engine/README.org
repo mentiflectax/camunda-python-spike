@@ -1,0 +1,66 @@
+* Camunda-Python Spike
+
+** Pythonic Script Tasks
+
+*** How to add support for Pythonic Script Tasks
+
+**** Step 1: Add Jython dependendency to ~pom.xml~ file
+
+#+begin_src
+<dependency>
+    <groupId>org.python</groupId>
+    <artifactId>jython</artifactId>
+    <version>2.7.2</version>
+</dependency>
+#+end_src
+
+**** Step 2: Configure the Jython scripting engine before launching the process application
+
+In the main class (~SampleApplication~), add the call ~Options.importSite = false;~ prior to starting the
+process engine ([[https://stackoverflow.com/a/52825525/399457][this]] StackOverflow answer explains why this is
+necessary):
+
+#+begin_src java
+public static void main(String... args){
+    Options.importSite = false;
+    SpringApplication.run(SampleApplication.class, args);
+}
+#+end_src
+
+*** What can a Pythonic script task do?
+
+According to section [[https://docs.camunda.org/manual/7.17/user-guide/process-engine/scripting/#variables-available-during-script-execution][Variables Available During Script Execution]],
+the variable ~execution~ of type [[https://docs.camunda.org/javadoc/camunda-bpm-platform/7.17/org/camunda/bpm/engine/delegate/DelegateExecution.html][DelegateExecution]
+is available within the Pythonic script tasks.
+
+**** Set process variable
+
+#+begin_src python
+execution.setVariable("STRING_PROCESS_VARIABLE", "This value comes from Python")
+execution.setVariable("INTEGER_PROCESS_VARIABLE", 404)
+execution.setVariable("FRACTIONAL_PROCESS_VARIABLE", 24.12)
+execution.setVariable("BOOLEAN_PROCESS_VARIABLE", True)
+#+end_src
+
+**** Read process variable
+
+#+begin_src python
+execution.getVariable("STRING_PROCESS_VARIABLE")
+execution.getVariable("INTEGER_PROCESS_VARIABLE")
+execution.getVariable("FRACTIONAL_PROCESS_VARIABLE")
+execution.getVariable("BOOLEAN_PROCESS_VARIABLE")
+#+end_src
+
+**** Create an incident
+
+#+begin_src python
+raise Exception("Exception from Python")
+#+end_src
+
+**** Read business key
+
+#+begin_src python
+execution.getProcessBusinessKey()
+#+end_src
+
+

@@ -58,6 +58,11 @@
             <version>${camunda.spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.python</groupId>
+            <artifactId>jython</artifactId>
+            <version>2.7.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

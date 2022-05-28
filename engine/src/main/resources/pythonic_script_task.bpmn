@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1evf7wi" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="Pythonic_Script_Task_Demo_Process" name="Pythonic Script Task Demo" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1nlsg7w</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1nlsg7w" sourceRef="StartEvent_1" targetRef="set_process_variable" />
+    <bpmn:endEvent id="Event_0wc4j41">
+      <bpmn:incoming>Flow_00af5bs</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0xdd025" sourceRef="set_process_variable" targetRef="wait_1" />
+    <bpmn:sequenceFlow id="Flow_1auw643" sourceRef="wait_1" targetRef="read_process_variables" />
+    <bpmn:scriptTask id="set_process_variable" name="Set process variable in Python" camunda:asyncBefore="true" scriptFormat="jython">
+      <bpmn:incoming>Flow_1nlsg7w</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xdd025</bpmn:outgoing>
+      <bpmn:script>execution.setVariable("STRING_PROCESS_VARIABLE", "This value comes from Python")
+
+execution.setVariable("INTEGER_PROCESS_VARIABLE", 404)
+execution.setVariable("FRACTIONAL_PROCESS_VARIABLE", 24.12)
+execution.setVariable("BOOLEAN_PROCESS_VARIABLE", True)
+
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:userTask id="wait_1" name="Wait 1" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_0xdd025</bpmn:incoming>
+      <bpmn:outgoing>Flow_1auw643</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_17gb18l" sourceRef="read_process_variables" targetRef="wait_2" />
+    <bpmn:scriptTask id="read_process_variables" name="Read process variables from Python" camunda:asyncBefore="true" scriptFormat="jython">
+      <bpmn:incoming>Flow_1auw643</bpmn:incoming>
+      <bpmn:outgoing>Flow_17gb18l</bpmn:outgoing>
+      <bpmn:script>procInstId = execution.getProcessInstanceId()
+textVariable = execution.getVariable("STRING_PROCESS_VARIABLE")
+intVariable = execution.getVariable("INTEGER_PROCESS_VARIABLE")
+fractionalVariable = execution.getVariable("FRACTIONAL_PROCESS_VARIABLE")
+boolVariable = execution.getVariable("BOOLEAN_PROCESS_VARIABLE")
+
+print("Process instance ID: " + procInstId)
+print("Business Key: " + execution.getProcessBusinessKey())
+print("textVariable: " + textVariable)
+print("intVariable: " + str(intVariable))
+print("fractionalVariable: " + str(fractionalVariable))
+print("boolVariable: " + str(boolVariable))</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_00af5bs" sourceRef="wait_2" targetRef="Event_0wc4j41" />
+    <bpmn:userTask id="wait_2" name="Wait 2" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_17gb18l</bpmn:incoming>
+      <bpmn:outgoing>Flow_00af5bs</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Pythonic_Script_Task_Demo_Process">
+      <bpmndi:BPMNEdge id="Flow_1nlsg7w_di" bpmnElement="Flow_1nlsg7w">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="260" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xdd025_di" bpmnElement="Flow_0xdd025">
+        <di:waypoint x="360" y="117" />
+        <di:waypoint x="410" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1auw643_di" bpmnElement="Flow_1auw643">
+        <di:waypoint x="510" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17gb18l_di" bpmnElement="Flow_17gb18l">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="740" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00af5bs_di" bpmnElement="Flow_00af5bs">
+        <di:waypoint x="840" y="117" />
+        <di:waypoint x="922" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1efhm61_di" bpmnElement="set_process_variable">
+        <dc:Bounds x="260" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1edigl5_di" bpmnElement="wait_1">
+        <dc:Bounds x="410" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04gicbi_di" bpmnElement="read_process_variables">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15nkcmh_di" bpmnElement="wait_2">
+        <dc:Bounds x="740" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wc4j41_di" bpmnElement="Event_0wc4j41">
+        <dc:Bounds x="922" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
