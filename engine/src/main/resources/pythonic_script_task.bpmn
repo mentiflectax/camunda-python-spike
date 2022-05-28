@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1evf7wi" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="Pythonic_Script_Task_Demo_Process" name="Pythonic Script Task Demo" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1nlsg7w</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1nlsg7w" sourceRef="StartEvent_1" targetRef="pythonic_script_task" />
+    <bpmn:scriptTask id="pythonic_script_task" name="Pythonic Script Task" scriptFormat="jython">
+      <bpmn:incoming>Flow_1nlsg7w</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ql2ev0</bpmn:outgoing>
+      <bpmn:script>print("Hello from the pythonic script task")</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:endEvent id="Event_0wc4j41">
+      <bpmn:incoming>Flow_1ql2ev0</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1ql2ev0" sourceRef="pythonic_script_task" targetRef="Event_0wc4j41" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Pythonic_Script_Task_Demo_Process">
+      <bpmndi:BPMNEdge id="Flow_1nlsg7w_di" bpmnElement="Flow_1nlsg7w">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="266" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ql2ev0_di" bpmnElement="Flow_1ql2ev0">
+        <di:waypoint x="366" y="117" />
+        <di:waypoint x="422" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_143dul9_di" bpmnElement="pythonic_script_task">
+        <dc:Bounds x="266" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wc4j41_di" bpmnElement="Event_0wc4j41">
+        <dc:Bounds x="422" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
