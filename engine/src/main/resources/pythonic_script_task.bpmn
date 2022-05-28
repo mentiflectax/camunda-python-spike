@@ -4,10 +4,10 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1nlsg7w</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1nlsg7w" sourceRef="StartEvent_1" targetRef="pythonic_script_task" />
+    <bpmn:sequenceFlow id="Flow_1nlsg7w" sourceRef="StartEvent_1" targetRef="set_process_variable" />
     <bpmn:scriptTask id="pythonic_script_task" name="Pythonic Script Task" scriptFormat="jython">
       <bpmn:extensionElements />
-      <bpmn:incoming>Flow_1nlsg7w</bpmn:incoming>
+      <bpmn:incoming>Flow_1auw643</bpmn:incoming>
       <bpmn:outgoing>Flow_1ql2ev0</bpmn:outgoing>
       <bpmn:script>print("Hello from the pythonic script task")</bpmn:script>
     </bpmn:scriptTask>
@@ -20,32 +20,63 @@
       <bpmn:incoming>Flow_1ql2ev0</bpmn:incoming>
       <bpmn:outgoing>Flow_040w9ui</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0xdd025" sourceRef="set_process_variable" targetRef="wait_1" />
+    <bpmn:sequenceFlow id="Flow_1auw643" sourceRef="wait_1" targetRef="pythonic_script_task" />
+    <bpmn:scriptTask id="set_process_variable" name="Set process variable in Python" scriptFormat="jython">
+      <bpmn:incoming>Flow_1nlsg7w</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xdd025</bpmn:outgoing>
+      <bpmn:script>execution.setVariable("STRING_PROCESS_VARIABLE", "This value comes from Python")
+
+execution.setVariable("INTEGER_PROCESS_VARIABLE", 404)
+execution.setVariable("FRACTIONAL_PROCESS_VARIABLE", 24.12)
+execution.setVariable("BOOLEAN_PROCESS_VARIABLE", true)
+
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:userTask id="wait_1" name="Wait 1">
+      <bpmn:incoming>Flow_0xdd025</bpmn:incoming>
+      <bpmn:outgoing>Flow_1auw643</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Pythonic_Script_Task_Demo_Process">
       <bpmndi:BPMNEdge id="Flow_1nlsg7w_di" bpmnElement="Flow_1nlsg7w">
         <di:waypoint x="215" y="117" />
-        <di:waypoint x="266" y="117" />
+        <di:waypoint x="260" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ql2ev0_di" bpmnElement="Flow_1ql2ev0">
-        <di:waypoint x="366" y="117" />
-        <di:waypoint x="420" y="117" />
+        <di:waypoint x="716" y="117" />
+        <di:waypoint x="770" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_040w9ui_di" bpmnElement="Flow_040w9ui">
-        <di:waypoint x="520" y="117" />
-        <di:waypoint x="592" y="117" />
+        <di:waypoint x="870" y="117" />
+        <di:waypoint x="942" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xdd025_di" bpmnElement="Flow_0xdd025">
+        <di:waypoint x="360" y="117" />
+        <di:waypoint x="410" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1auw643_di" bpmnElement="Flow_1auw643">
+        <di:waypoint x="510" y="117" />
+        <di:waypoint x="616" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_143dul9_di" bpmnElement="pythonic_script_task">
-        <dc:Bounds x="266" y="77" width="100" height="80" />
+        <dc:Bounds x="616" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0wc4j41_di" bpmnElement="Event_0wc4j41">
-        <dc:Bounds x="592" y="99" width="36" height="36" />
+        <dc:Bounds x="942" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1jyygmc_di" bpmnElement="Activity_018azbx">
-        <dc:Bounds x="420" y="77" width="100" height="80" />
+        <dc:Bounds x="770" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1efhm61_di" bpmnElement="set_process_variable">
+        <dc:Bounds x="260" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1edigl5_di" bpmnElement="wait_1">
+        <dc:Bounds x="410" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
