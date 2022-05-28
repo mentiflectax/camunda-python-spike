@@ -1,0 +1,28 @@
+* Camunda-Python Spike
+
+** Pythonic Script Tasks
+
+*** How to add support for Pythonic Script Tasks
+
+**** Step 1: Add Jython dependendency to ~pom.xml~ file
+
+#+begin_src
+<dependency>
+    <groupId>org.python</groupId>
+    <artifactId>jython</artifactId>
+    <version>2.7.2</version>
+</dependency>
+#+end_src
+
+**** Step 2: Configure the Jython scripting engine before launching the process application
+
+In the main class (~SampleApplication~), add the call ~Options.importSite = false;~ prior to starting the
+process engine ([this](https://stackoverflow.com/a/52825525/399457) StackOverflow answer explains why this is
+necessary):
+
+#+begin_src
+public static void main(String... args){
+    Options.importSite = false;
+    SpringApplication.run(SampleApplication.class, args);
+}
+#+end_src
