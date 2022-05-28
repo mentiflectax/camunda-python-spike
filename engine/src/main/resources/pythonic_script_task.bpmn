@@ -29,7 +29,7 @@
 
 execution.setVariable("INTEGER_PROCESS_VARIABLE", 404)
 execution.setVariable("FRACTIONAL_PROCESS_VARIABLE", 24.12)
-execution.setVariable("BOOLEAN_PROCESS_VARIABLE", true)
+execution.setVariable("BOOLEAN_PROCESS_VARIABLE", True)
 
 </bpmn:script>
     </bpmn:scriptTask>

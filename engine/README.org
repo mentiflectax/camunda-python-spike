@@ -20,7 +20,7 @@ In the main class (~SampleApplication~), add the call ~Options.importSite = fals
 process engine ([[https://stackoverflow.com/a/52825525/399457][this]] StackOverflow answer explains why this is
 necessary):
 
-#+begin_src
+#+begin_src java
 public static void main(String... args){
     Options.importSite = false;
     SpringApplication.run(SampleApplication.class, args);
@@ -34,6 +34,13 @@ the variable ~execution~ of type [[https://docs.camunda.org/javadoc/camunda-bpm-
 is available within the Pythonic script tasks.
 
 **** Set process variable
+
+#+begin_src python
+execution.setVariable("STRING_PROCESS_VARIABLE", "This value comes from Python")
+execution.setVariable("INTEGER_PROCESS_VARIABLE", 404)
+execution.setVariable("FRACTIONAL_PROCESS_VARIABLE", 24.12)
+execution.setVariable("BOOLEAN_PROCESS_VARIABLE", True)
+#+end_src
 
 **** Read process variable
 
