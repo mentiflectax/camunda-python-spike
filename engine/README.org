@@ -44,11 +44,23 @@ execution.setVariable("BOOLEAN_PROCESS_VARIABLE", True)
 
 **** Read process variable
 
+#+begin_src python
+execution.getVariable("STRING_PROCESS_VARIABLE")
+execution.getVariable("INTEGER_PROCESS_VARIABLE")
+execution.getVariable("FRACTIONAL_PROCESS_VARIABLE")
+execution.getVariable("BOOLEAN_PROCESS_VARIABLE")
+#+end_src
+
+
 **** Create an incident
 
 **** Throw a business error
 
 **** Read business key
+
+#+begin_src python
+execution.getProcessBusinessKey()
+#+end_src
 
 **** Set business key
 
