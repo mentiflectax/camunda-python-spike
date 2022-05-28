@@ -13,7 +13,10 @@
     <bpmn:scriptTask id="create_incident" name="Create incident in Python" camunda:asyncBefore="true" scriptFormat="jython">
       <bpmn:incoming>Flow_1iy3vj9</bpmn:incoming>
       <bpmn:outgoing>Flow_1nthf5w</bpmn:outgoing>
-      <bpmn:script>execution.createIncident("incidentType", "configuration", "error message")</bpmn:script>
+      <bpmn:script>raise Exception("Exception from Python")
+
+# execution.createIncident("executeInternal", "configuration", "error message")
+# execution.getProcessEngine().getRuntimeService().suspendProcessInstanceById(execution.getProcessInstanceId())</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:endEvent id="Event_0c178a2">
       <bpmn:incoming>Flow_1nthf5w</bpmn:incoming>
