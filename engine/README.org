@@ -57,8 +57,6 @@ execution.getVariable("BOOLEAN_PROCESS_VARIABLE")
 raise Exception("Exception from Python")
 #+end_src
 
-**** Throw a business error
-
 **** Read business key
 
 #+begin_src python
