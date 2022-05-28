@@ -53,6 +53,10 @@ execution.getVariable("BOOLEAN_PROCESS_VARIABLE")
 
 **** Create an incident
 
+#+begin_src python
+raise Exception("Exception from Python")
+#+end_src
+
 **** Throw a business error
 
 **** Read business key
