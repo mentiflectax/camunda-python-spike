@@ -17,7 +17,7 @@
 **** Step 2: Configure the Jython scripting engine before launching the process application
 
 In the main class (~SampleApplication~), add the call ~Options.importSite = false;~ prior to starting the
-process engine ([this](https://stackoverflow.com/a/52825525/399457) StackOverflow answer explains why this is
+process engine ([[https://stackoverflow.com/a/52825525/399457][this]] StackOverflow answer explains why this is
 necessary):
 
 #+begin_src
